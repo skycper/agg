@@ -1,7 +1,8 @@
    @extends('layouts.app')
 
 @section('content')
-  <form action="{{ url('pet/'.$pet->id) }}" method="PATCH" class="form-horizontal">
+  <form action="{{ url('pet/'.$pet->id) }}" method="POST" class="form-horizontal">
+      {{ csrf_field() }}
 
             <!-- Pet Name -->
             <div class="form-group">

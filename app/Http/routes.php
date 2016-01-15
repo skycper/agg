@@ -35,5 +35,6 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/home', 'HomeController@index');
 
+    Route::post('pet/{id}', 'PetController@update');
     Route::resource('pet', 'PetController');
 });

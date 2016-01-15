@@ -110,9 +110,7 @@ class PetController extends Controller
         //
         $pet = Pet::find($id);
 
-        $pet->name = $request->name;
-
-        $pet->save();
+        $pet->update($request->except('id'));
 
         return redirect('/pet');
     }

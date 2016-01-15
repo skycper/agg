@@ -55,7 +55,7 @@
                                 <tr>
                                     <!-- Pet Name -->
                                     <td class="table-text">
-                                        <div>{{ $pet->name }}</div>
+                                        <a href=" {{ url('pet/'.$pet->id) }} ">{{ $pet->name }}</a>
                                     </td>
 
                                     <td>

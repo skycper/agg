@@ -14,6 +14,9 @@ class CreateRecordsTable extends Migration
     {
         Schema::create('records', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('pet_id')->index();
+            $table->tinyInteger('record_type')->default(0);
+            $table->text('content');
             $table->timestamps();
         });
     }

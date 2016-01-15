@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Record;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -38,6 +39,16 @@ class RecordController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'content' => 'required',
+        ]);
+
+        $input = $request->all();
+        $input['pet_id'] = intval($input['pet_id']);
+//        dd($input);
+        Record::create($input);
+
+        return redirect('/pet/'.$input['pet_id']);
     }
 
     /**

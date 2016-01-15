@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Pet;
+use App\Record;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\pet;
+
 use App\Repositories\PetRepository;
 
 class PetController extends Controller
@@ -34,8 +37,6 @@ class PetController extends Controller
     public function index(Request $request)
     {
         //
-
-
         return view('pets.index', [
             'pets' => $this->pets->forUser($request->user()),
         ]);
@@ -80,6 +81,13 @@ class PetController extends Controller
     public function show($id)
     {
         //
+        $pet = Pet::findOrFail($id);
+        $records = Record::where('pet_id', $id)->get();
+
+        return view('pets.show', [
+            'pet' => $pet,
+            'records' => $records,
+        ]);
     }
 
     /**

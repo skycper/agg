@@ -2,6 +2,7 @@
 
 @section('content')
   <form action="{{ url('pet/'.$pet->id) }}" method="POST" class="form-horizontal">
+  <input name="_method" type="hidden" value="PUT">
       {{ csrf_field() }}
 
             <!-- Pet Name -->

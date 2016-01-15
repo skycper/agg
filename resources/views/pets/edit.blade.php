@@ -3,7 +3,7 @@
 @section('content')
   <form action="{{ url('pet/'.$pet->id) }}" method="POST" class="form-horizontal">
       {{ csrf_field() }}
-      {{ method_field('PUT') }}
+      {{ method_field('PATCH') }}
 
             <!-- Pet Name -->
             <div class="form-group">

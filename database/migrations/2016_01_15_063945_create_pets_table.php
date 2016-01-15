@@ -14,6 +14,8 @@ class CreatePetsTable extends Migration
     {
         Schema::create('pets', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->index();
+            $table->string('name');
             $table->timestamps();
         });
     }

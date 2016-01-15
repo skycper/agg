@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\pet;
+use App\Repositories\PetRepository;
 
 class PetController extends Controller
 {
@@ -14,9 +16,29 @@ class PetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    /**
+     * The pet repository instance.
+     *
+     * @var PetRepository
+     */
+    protected $pets;
+
+    public function __construct(PetRepository $pets)
+    {
+        $this->middleware('auth');
+
+        $this->pets = $pets;
+    }
+
+    public function index(Request $request)
     {
         //
+
+
+        return view('pets.index', [
+            'pets' => $this->pets->forUser($request->user()),
+        ]);
     }
 
     /**
@@ -38,6 +60,15 @@ class PetController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'name' => 'required|max:25',
+        ]);
+
+        $request->user()->pets()->create([
+            'name' => $request->name,
+        ]);
+
+        return redirect('/pet');
     }
 
     /**
@@ -60,6 +91,11 @@ class PetController extends Controller
     public function edit($id)
     {
         //
+        $pet = Pet::find($id);
+
+        return view('pets.edit', [
+            'pet' => $pet,
+        ]);
     }
 
     /**
@@ -72,6 +108,13 @@ class PetController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $pet = Pet::find($id);
+
+        $pet->name = $request->name;
+
+        $pet->save();
+
+        return redirect('/pet');
     }
 
     /**
@@ -80,8 +123,13 @@ class PetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Pet $pet)
     {
         //
+        $this->authorize('destroy', $pet);
+
+        $pet->delete();
+
+        return redirect('/pet');
     }
 }

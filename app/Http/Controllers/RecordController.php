@@ -2,14 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Pet;
 use App\Record;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Repositories\RecordRepository;
+
 class RecordController extends Controller
 {
+    /**
+     * The record repository instance.
+     *
+     * @var RecordRepository
+     */
+    protected $records;
+
+    public function __construct(RecordRepository $records)
+    {
+        $this->middleware('auth');
+
+        $this->records = $records;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,19 +53,18 @@ class RecordController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Pet $pet)
     {
         //
         $this->validate($request, [
             'content' => 'required',
         ]);
 
-        $input = $request->all();
-        $input['pet_id'] = intval($input['pet_id']);
-//        dd($input);
-        Record::create($input);
+        $pet->records()->create([
+            'content' => $request->content,
+        ]);
 
-        return redirect('/pet/'.$input['pet_id']);
+        return redirect('/pet/'.$pet->id);
     }
 
     /**
@@ -91,8 +107,15 @@ class RecordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Record $record)
     {
         //
+        $this->authorize('destroy', $record);
+
+        $record->delete();
+
+        $pet = $record->pet()->first();
+
+        return redirect('/pet/'.$pet->id);
     }
 }

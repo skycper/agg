@@ -12,10 +12,8 @@
     <h2>{{ $pet->name }}</h2>
 
     <!-- New Record Form -->
-    <form action="{{ url('record') }}" method="POST" class="form-horizontal">
+    <form action="{{ url('record/'.$pet->id) }}" method="POST" class="form-horizontal">
         {{ csrf_field() }}
-
-        <input type="hidden" id="pet_id" name="pet_id" value="{{ $pet->id }}" />
 
         <!-- Record Content -->
         <div class="form-group">

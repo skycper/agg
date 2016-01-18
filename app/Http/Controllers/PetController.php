@@ -11,6 +11,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Repositories\PetRepository;
+use App\Repositories\RecordRepository;
 
 class PetController extends Controller
 {
@@ -25,13 +26,14 @@ class PetController extends Controller
      *
      * @var PetRepository
      */
-    protected $pets;
+    protected $pets, $records;
 
-    public function __construct(PetRepository $pets)
+    public function __construct(PetRepository $pets, RecordRepository $records)
     {
         $this->middleware('auth');
 
         $this->pets = $pets;
+        $this->records = $records;
     }
 
     public function index(Request $request)
@@ -82,7 +84,7 @@ class PetController extends Controller
     {
         //
         $pet = Pet::findOrFail($id);
-        $records = Record::where('pet_id', $id)->get();
+        $records = $this->records->forPet($pet);
 
         return view('pets.show', [
             'pet' => $pet,

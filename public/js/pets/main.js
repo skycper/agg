@@ -21,7 +21,9 @@ require(requireApp, function($) {
     var $field = $("input[type='file']");
 
     $(document).ready(function(){
+        $(this).remove();
         $("#upload-wrap").show();
+
         $field.uploadify({
             'buttonText': '选择图片'
             ,'swf': 'js/vendor/uploadify/uploadify.swf?v=' + ( parseInt(Math.random()*1000) )
@@ -51,12 +53,13 @@ require(requireApp, function($) {
                     $("#ratio-wrap").show();
                     $image.bind('click',function(e){
                         e.preventDefault();
-                        alert('请先设置裁剪宽高比！');
+                        //alert('请先设置裁剪宽高比！');
+                    });
+
+                    $(function() {
+                        setInterval(initImgCut, 1000);
                     });
                 }
-
-                initCut();
-
             }
             ,'onUploadError' : function(file, errorCode, errorMsg, errorString){
                 alert(errorString);
@@ -70,8 +73,7 @@ require(requireApp, function($) {
         $field.uploadify('upload','*');
     });
 
-    function initCut(){
-
+    function initImgCut(){
         //确定裁剪宽高比
         var ratio = parseFloat($("#ratio").val());
         if( isNaN(ratio) ){
@@ -179,4 +181,3 @@ require(requireApp, function($) {
         });
     }
 });
-

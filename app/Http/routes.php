@@ -37,5 +37,6 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::resource('pet', 'PetController');
 
+    Route::post('record/{pet}', 'RecordController@store');
     Route::resource('record', 'RecordController');
 });

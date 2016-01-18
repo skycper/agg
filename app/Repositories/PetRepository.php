@@ -7,7 +7,7 @@ use App\Pet;
 class PetRepository
 {
     /**
-     * Get all of the tasks for a given user.
+     * Get all of the pets for a given user.
      *
      * @param  User  $user
      * @return Collection

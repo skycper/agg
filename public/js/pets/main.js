@@ -21,13 +21,12 @@ require(requireApp, function($) {
     var $field = $("input[type='file']");
 
     $(document).ready(function(){
-        $(this).remove();
         $("#upload-wrap").show();
 
         $field.uploadify({
             'buttonText': '选择图片'
             ,'swf': 'js/vendor/uploadify/uploadify.swf?v=' + ( parseInt(Math.random()*1000) )
-            ,'uploader'  : 'receive.php'
+            ,'uploader'  : 'image/upload'
             ,'auto'      : false
             ,'multi'     : false
             ,'method'    : 'post'
@@ -57,7 +56,7 @@ require(requireApp, function($) {
                     });
 
                     $(function() {
-                        setInterval(initImgCut, 1000);
+                        setInterval(initImgCut, 100);
                     });
                 }
             }
@@ -146,6 +145,7 @@ require(requireApp, function($) {
         //点击确认裁剪时
         $("#cut").show().click(function(e){
             e.preventDefault();
+            $("#cut").unbind('click');
             var $this = $(this);
             var data = $preview.data();
             if( typeof data['width'] === 'undefined' ||
@@ -160,7 +160,7 @@ require(requireApp, function($) {
             $this.addClass('active').text('裁剪中...');
             data['name'] = $uploaded.data('name');
             $.ajax({
-                url:'cutImage.php',
+                url:'image/cut',
                 type:'POST',
                 data:data,
                 success: function(data){
@@ -168,13 +168,11 @@ require(requireApp, function($) {
                     if( rst.status == 0 ){
                         alert('失败!'+rst.info);
                     }else{
-                        $this.hide();
-                        $("#download").show().prop('href',rst.url).prop('target','_blank');
+                        $("#cut").hide();
+                        $("#download").show().prop('href',rst.path).prop('target','_blank');
                         $("#cuted-wrap").show();
                         $("#image-cuted").prop('src',rst.path);
                         imgArea.setOptions({'disable':true,'hide':true});//去掉选区功能
-
-                        alert('图片已裁剪！点击\'下载成品\'可下载！');
                     }
                 }
             });

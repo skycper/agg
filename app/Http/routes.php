@@ -39,4 +39,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::post('record/{pet}', 'RecordController@store');
     Route::resource('record', 'RecordController');
+
+    Route::post('image/upload', 'ImageController@upload');
+    Route::post('image/cut', 'ImageController@cut');
 });

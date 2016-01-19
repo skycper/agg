@@ -149,5 +149,7 @@
 
 @section('pet_scripts')
     <!-- JavaScripts -->
-    <script data-main="js/pets/main" type="text/javascript" src="js/vendor/require.min.js"></script>
+    <script data-main="js/pets/main" type="text/javascript" src="js/vendor/jquery.imgareaselect-0.9.10/jquery.imgareaselect.min.js"></script>
+    <script data-main="js/pets/main" type="text/javascript" src="js/vendor/uploadify/jquery.uploadify.min.js"></script>
+    <script data-main="js/pets/main" type="text/javascript" src="js/pets/main.js"></script>
 @endsection

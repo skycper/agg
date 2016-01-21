@@ -27,10 +27,6 @@
 <body>
 
 <ion-nav-view>
-	<ion-nav-bar class="bar-positive">
-		<ion-nav-back-button class="button-clear">
-		</ion-nav-back-button>
-	</ion-nav-bar>
 </ion-nav-view>
 
 <!--[if lte IE 7]>

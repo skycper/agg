@@ -18,7 +18,6 @@
 
 <!-- Styles -->
 	<link href="js/vendor/ionic/css/ionic.min.css" rel="stylesheet">
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
 	<link rel="shortcut icon" href="img/icon/favicon.ico" />
 
@@ -27,34 +26,12 @@
 </head>
 <body>
 
-	<ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
-      </ion-header-bar>
-      <ion-content>
-      </ion-content>
-    </ion-pane>
-
-    <ion-side-menus>
-
-    <!-- Center content -->
-    <ion-side-menu-content>
-      <ion-header-bar class="bar-dark">
-        <h1 class="title">Todo</h1>
-      </ion-header-bar>
-      <ion-content>
-      </ion-content>
-    </ion-side-menu-content>
-
-    <!-- Left menu -->
-    <ion-side-menu side="left">
-      <ion-header-bar class="bar-dark">
-        <h1 class="title">Projects</h1>
-      </ion-header-bar>
-    </ion-side-menu>
-
-  </ion-side-menus>
-
+<ion-nav-view>
+	<ion-nav-bar class="bar-positive">
+		<ion-nav-back-button class="button-clear">
+		</ion-nav-back-button>
+	</ion-nav-bar>
+</ion-nav-view>
 
 <!--[if lte IE 7]>
 	<script src="js/vendor/JSON-js/json2.js"></script>
@@ -90,8 +67,7 @@
 	<script src="js/vendor/ionic/js/ionic.min.js"></script>
 	<script src="js/vendor/ionic/js/ionic-angular.min.js"></script>
 	<script src="js/vendor/ionic/js/angular-ui/angular-ui-router.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="js/vendor/jquery.min.js"></script>
 	<!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 

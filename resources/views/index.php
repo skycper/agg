@@ -9,7 +9,7 @@
 
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
 	
 
 <!-- Fonts -->
@@ -17,9 +17,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
 <!-- Styles -->
-	<link rel="stylesheet" href="js/vendor/mobile-angular-ui/dist/css/mobile-angular-ui-hover.min.css" />
-	<link rel="stylesheet" href="js/vendor/mobile-angular-ui/dist/css/mobile-angular-ui-base.min.css" />
-	<link rel="stylesheet" href="js/vendor/mobile-angular-ui/dist/css/mobile-angular-ui-desktop.min.css" />
+	<link href="js/vendor/ionic/css/ionic.min.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
 	<link rel="shortcut icon" href="img/icon/favicon.ico" />
@@ -29,25 +27,33 @@
 </head>
 <body>
 
-	<!-- Sidebars -->
-	<div class="sidebar sidebar-left"><!-- ... --></div>
-	<div class="sidebar sidebar-right"><!-- ... --></div>
+	<ion-pane>
+      <ion-header-bar class="bar-stable">
+        <h1 class="title">Ionic Blank Starter</h1>
+      </ion-header-bar>
+      <ion-content>
+      </ion-content>
+    </ion-pane>
 
-	<div class="app">
-	<div class="navbar navbar-app navbar-absolute-top"><!-- Top Navbar --></div>
-	<div class="navbar navbar-app navbar-absolute-bottom"><!-- Bottom Navbar --></div>
+    <ion-side-menus>
 
-	<!-- App body -->
+    <!-- Center content -->
+    <ion-side-menu-content>
+      <ion-header-bar class="bar-dark">
+        <h1 class="title">Todo</h1>
+      </ion-header-bar>
+      <ion-content>
+      </ion-content>
+    </ion-side-menu-content>
 
-	<div class='app-body'>
-		<div class='app-content'>
-			<ng-view></ng-view>
-		</div>
-	</div>
-	</div><!-- ~ .app -->
+    <!-- Left menu -->
+    <ion-side-menu side="left">
+      <ion-header-bar class="bar-dark">
+        <h1 class="title">Projects</h1>
+      </ion-header-bar>
+    </ion-side-menu>
 
-	<!-- Modals and Overlays -->
-	<div ui-yield-to="modals"></div>
+  </ion-side-menus>
 
 
 <!--[if lte IE 7]>
@@ -79,9 +85,15 @@
 <!-- JavaScripts -->
 	<script src="js/vendor/angular/angular.min.js"></script>
 	<script src="js/vendor/angular/angular-route.min.js"></script>
-	<script src="js/vendor/mobile-angular-ui/dist/js/mobile-angular-ui.min.js"></script>
+	<script src="js/vendor/angular/angular-animate.min.js"></script>
+	<script src="js/vendor/angular/angular-sanitize.min.js"></script>
+	<script src="js/vendor/ionic/js/ionic.min.js"></script>
+	<script src="js/vendor/ionic/js/ionic-angular.min.js"></script>
+	<script src="js/vendor/ionic/js/angular-ui/angular-ui-router.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
 
 	<script src="js/app.js"></script>
 

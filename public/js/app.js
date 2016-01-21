@@ -1,4 +1,4 @@
-deps = ['ngRoute', 'mobile-angular-ui'];
+deps = ['ngRoute', 'ionic'];
 
 agg = angular.module('agg', deps).filter(  
     'to_trusted', ['$sce', function ($sce) {  

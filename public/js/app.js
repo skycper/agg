@@ -39,7 +39,39 @@ agg.controller('appController', function($scope, $timeout, $http){
 	
 });
 
-agg.controller('petController', function($scope, $http, $ionicModal){
+agg.controller('petController', function($scope, $http, $ionicModal, $ionicActionSheet, $timeout){
+	$scope.showPicSelectActionSheet = function() {
+		// Show the action sheet
+		var hideSheet = $ionicActionSheet.show({
+			buttons: [
+				{ text: '拍照' },
+				{ text: '从相册选取' }
+			],
+			titleText: '为龟宝宝选张大头照吧',
+			cancelText: '取消',
+			cancel: function() {
+				hideSheet();
+			},
+			buttonClicked: function(index) {
+				switch(index){
+					case 0:
+						hideSheet();
+						$scope.openCreatePetModal();
+						break;
+					case 1:
+						hideSheet();
+						$scope.openCreatePetModal();
+						break;
+					default:
+						hideSheet();
+						break;
+				}
+			}
+		});
+	};
+
+
+
 	$ionicModal.fromTemplateUrl('views/pets/create.html', {
 		scope: $scope,
 		animation: 'slide-in-up'

@@ -16,6 +16,9 @@ class CreatePetsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->index();
             $table->string('name');
+            $table->date('birthday')->nullable();
+            $table->char('category', 1)->default(0);
+            $table->binary('avatar')->nullable();
             $table->timestamps();
         });
     }

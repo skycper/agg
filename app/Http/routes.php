@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 });
 
 /*
@@ -35,11 +35,14 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/home', 'HomeController@index');
 
-    Route::resource('pet', 'PetController');
+    Route::group(['prefix' => 'api'], function () {
+        Route::group(['prefix' => 'pet'], function() {
+            Route::get('all', 'PetController@all');
+            Route::post('store', 'PetController@store');
+        });
+    });
 
     Route::post('record/{pet}', 'RecordController@store');
     Route::resource('record', 'RecordController');
 
-    Route::post('image/upload', 'ImageController@upload');
-    Route::post('image/cut', 'ImageController@cut');
 });

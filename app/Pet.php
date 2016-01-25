@@ -9,7 +9,7 @@ class Pet extends Model
 {
     //
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'user_id', 'birthday', 'category', 'avatar'];
 
     public function user()
     {

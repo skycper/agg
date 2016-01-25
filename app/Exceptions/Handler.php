@@ -48,7 +48,7 @@ class Handler extends ExceptionHandler
     {
         if($e instanceof NotFoundHttpException)
         {
-            return response()->view('index')->header('Content-Type', 'text/html');
+
         }
         return parent::render($request, $e);
     }

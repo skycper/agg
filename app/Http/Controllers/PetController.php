@@ -30,7 +30,7 @@ class PetController extends Controller
 
     public function __construct(PetRepository $pets, RecordRepository $records)
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
 
         $this->pets = $pets;
         $this->records = $records;
@@ -42,6 +42,14 @@ class PetController extends Controller
         return view('pets.index', [
             'pets' => $this->pets->forUser($request->user()),
         ]);
+    }
+
+    public function all(Request $request)
+    {
+//        return $this->pets->forUser($request->user());
+
+        $pets = Pet::all();
+        return $pets;
     }
 
     /**
@@ -63,15 +71,29 @@ class PetController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request, [
-            'name' => 'required|max:25',
-        ]);
+//        return $request->user()->pets()->create([
+//            'name' => $request->petName,
+//            'user_id' => 1
+//        ]);
 
-        $request->user()->pets()->create([
-            'name' => $request->name,
-        ]);
+//        $pet  = new Pet;
+//        $pet->name = $request->petName;
+//        $pet->user_id = 1;
+//        $pet->birthday = $request->createPetBirthday;
+//        $pet->category = $request->createPetCategory;
+//        $pet->avatar = $request->avatarData;
 
-        return redirect('/pet');
+        $petData = [
+            'name' => $request->petName,
+            'user_id' => 1,
+            'birthday' => $request->createPetBirthday,
+            'category' => $request->createPetCategory,
+            'avatar' => $request->avatarData,
+        ];
+
+        $pet = Pet::create($petData);
+        return $pet;
+
     }
 
     /**

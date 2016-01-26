@@ -36,6 +36,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/home', 'HomeController@index');
 
     Route::group(['prefix' => 'api'], function () {
+        Route::group(['prefix' => 'auth'], function() {
+            Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
+            Route::post('authenticate', 'AuthenticateController@authenticate');
+            Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
+        });
         Route::group(['prefix' => 'pet'], function() {
             Route::get('all', 'PetController@all');
             Route::post('store', 'PetController@store');

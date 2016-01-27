@@ -17,7 +17,7 @@ class AuthenticateController extends Controller
         // Apply the jwt.auth middleware to all methods in this controller
         // except for the authenticate method. We don't want to prevent
         // the user from retrieving their token if they don't already have it
-        $this->middleware('jwt.auth', ['except' => ['authenticate', 'createUser']]);
+        $this->middleware('jwt.auth', ['except' => ['authenticate', 'signup']]);
     }
 
     public function index()
@@ -71,7 +71,7 @@ class AuthenticateController extends Controller
         return response()->json(compact('user'));
     }
 
-    public function createUser(Request $request)
+    public function signup(Request $request)
     {
         $credentials = $request->only('name', 'email', 'password');
         $credentials['password'] = bcrypt( $credentials['password']);

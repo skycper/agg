@@ -40,7 +40,7 @@ Route::group(['middleware' => 'web'], function () {
                 Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
                 Route::post('authenticate', 'AuthenticateController@authenticate');
                 Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
-                Route::post('register', 'AuthenticateController@createUser');
+                Route::post('register', 'AuthenticateController@signup');
             });
             Route::group(['prefix' => 'pet'], function() {
                 Route::get('all', 'PetController@all');

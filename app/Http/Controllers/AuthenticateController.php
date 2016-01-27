@@ -10,7 +10,6 @@ use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
 
-
 class AuthenticateController extends Controller
 {
     public function __construct()
@@ -18,7 +17,7 @@ class AuthenticateController extends Controller
         // Apply the jwt.auth middleware to all methods in this controller
         // except for the authenticate method. We don't want to prevent
         // the user from retrieving their token if they don't already have it
-        $this->middleware('jwt.auth', ['except' => ['authenticate']]);
+        $this->middleware('jwt.auth', ['except' => ['authenticate', 'createUser']]);
     }
 
     public function index()
@@ -70,5 +69,18 @@ class AuthenticateController extends Controller
 
         // the token is valid and we have found the user via the sub claim
         return response()->json(compact('user'));
+    }
+
+    public function createUser(Request $request)
+    {
+        $credentials = $request->only('name', 'email', 'password');
+        $credentials['password'] = bcrypt( $credentials['password']);
+
+        try {
+            $user = User::create($credentials);
+            return $user->id;
+        } catch (Exception $e) {
+            return Response::json(['error' => 'User already exists.'], HttpResponse::HTTP_CONFLICT);
+        }
     }
 }

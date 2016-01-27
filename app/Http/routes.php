@@ -31,23 +31,25 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::group(['middleware' => 'web'], function () {
-    Route::auth();
+    Route::group(['middleware' => 'cors'], function () {
 
-    Route::get('/home', 'HomeController@index');
+        Route::get('/home', 'HomeController@index');
 
-    Route::group(['prefix' => 'api'], function () {
-        Route::group(['prefix' => 'auth'], function() {
-            Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
-            Route::post('authenticate', 'AuthenticateController@authenticate');
-            Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
+        Route::group(['prefix' => 'api'], function () {
+            Route::group(['prefix' => 'auth'], function() {
+                Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
+                Route::post('authenticate', 'AuthenticateController@authenticate');
+                Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
+                Route::post('register', 'AuthenticateController@createUser');
+            });
+            Route::group(['prefix' => 'pet'], function() {
+                Route::get('all', 'PetController@all');
+                Route::post('store', 'PetController@store');
+            });
         });
-        Route::group(['prefix' => 'pet'], function() {
-            Route::get('all', 'PetController@all');
-            Route::post('store', 'PetController@store');
-        });
+
+        Route::post('record/{pet}', 'RecordController@store');
+        Route::resource('record', 'RecordController');
+
     });
-
-    Route::post('record/{pet}', 'RecordController@store');
-    Route::resource('record', 'RecordController');
-
 });

@@ -13,6 +13,8 @@ use App\Http\Controllers\Controller;
 use App\Repositories\PetRepository;
 use App\Repositories\RecordRepository;
 
+use JWTAuth;
+
 class PetController extends Controller
 {
     /**
@@ -30,8 +32,6 @@ class PetController extends Controller
 
     public function __construct(PetRepository $pets, RecordRepository $records)
     {
-//        $this->middleware('auth');
-
         $this->pets = $pets;
         $this->records = $records;
     }
@@ -46,10 +46,12 @@ class PetController extends Controller
 
     public function all(Request $request)
     {
-//        return $this->pets->forUser($request->user());
+        $token = JWTAuth::getToken();
+        $user = JWTAuth::toUser($token);
+        return $this->pets->forUser($user);
 
-        $pets = Pet::all();
-        return $pets;
+//        $pets = Pet::all();
+//        return $pets;
     }
 
     /**

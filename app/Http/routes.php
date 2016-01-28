@@ -42,9 +42,20 @@ Route::group(['middleware' => 'web'], function () {
                 Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
                 Route::post('register', 'AuthenticateController@signup');
             });
+            Route::group(['prefix' => 'user'], function() {
+                Route::post('update', 'UserController@update');
+            });
             Route::group(['prefix' => 'pet'], function() {
                 Route::get('all', 'PetController@all');
                 Route::post('store', 'PetController@store');
+            });
+            Route::group(['prefix' => 'region'], function() {
+                Route::get('province', 'RegionController@getAllProvinces');
+                Route::get('province/{id}', 'RegionController@getProvinceById');
+                Route::get('province/{id}/city', 'RegionController@getCitiesForProvince');
+                Route::get('city/{id}', 'RegionController@getCityById');
+                Route::get('city/{id}/area', 'RegionController@getAreasForCity');
+                Route::get('area/{id}', 'RegionController@getAreaById');
             });
         });
 

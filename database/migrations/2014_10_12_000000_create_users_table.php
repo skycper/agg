@@ -18,8 +18,11 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->binary('avatar')->nullable();
+            $table->enum('gender', array('男', '女'))->nullable();
             $table->date('birthday')->nullable();
-            $table->integer('region_id')->nullable();
+            $table->string('province_id', 20)->nullable();
+            $table->string('city_id', 20)->nullable();
+            $table->string('area_id', 20)->nullable();
             $table->integer('grade')->unsigned()->default(1);
             $table->integer('credit')->unsigned()->default(0);
             $table->rememberToken();
